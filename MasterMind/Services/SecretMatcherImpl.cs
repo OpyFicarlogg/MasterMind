@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using MasterMind.Extensions;
 using System.Linq;
 using System.Text;
 
@@ -13,10 +12,11 @@ namespace MasterMind.Services
             this.secret = secret;
         }
 
-        public string getExactMatch(string input)
+        public string getMatch(string input)
         {
             StringBuilder exactMatch = new StringBuilder();
 
+            //Get list of number at the exact position
             int i = 0;
             foreach(char c in input)
             {
@@ -27,7 +27,7 @@ namespace MasterMind.Services
                 i += 1;
             }
 
- 
+
             //Autre possibilité avec linq
             /*string match = String.Concat(input
                                         .Select((elt, index) => new { elt, index })
@@ -35,23 +35,13 @@ namespace MasterMind.Services
                                         .Select(obj => obj.elt)
                                   );*/
 
-
+            //Get number of element at the wrong position
+            //TODO: Correction du cas 1322  avec par exemple 1223 qui va retourner: ++- à la place de ++--
             int wrongPosition = input.Count(elt => !secret.IndexOf(elt).Equals(-1) && exactMatch.ToString().IndexOf(elt).Equals(-1));
 
-            return convertValueToString(exactMatch.Length,"+")+convertValueToString(wrongPosition, "-");
+            return exactMatch.Length.convertValueToString("+")+ wrongPosition.convertValueToString("-");
         }
 
-
-        private String convertValueToString(int value, String toConvert) 
-        {
-            Console.WriteLine($"value = {value} || toConvert = {toConvert}");
-            StringBuilder result = new StringBuilder();
-            for(int i = 0; i < value;i++){
-                result.Append(toConvert);
-            }
-
-            return result.ToString();
-        }
 
         public void setSecret(string secret)
         {

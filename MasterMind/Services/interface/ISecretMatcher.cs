@@ -6,7 +6,7 @@ namespace MasterMind.Services
 {
     interface ISecretMatcher
     {
-        string getExactMatch(string input);
+        string getMatch(string input);
         void setSecret(string secret);
     }
 }
