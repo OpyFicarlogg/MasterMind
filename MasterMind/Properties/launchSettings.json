@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "MasterMind": {
+      "commandName": "Project",
+      "commandLineArgs": "--round 5 -l 4"
+    }
+  }
+}

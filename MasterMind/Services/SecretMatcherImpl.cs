@@ -4,12 +4,12 @@ using System.Text;
 
 namespace MasterMind.Services
 {
-    class SecretMatcherImpl : ISecretMatcher
+    public class SecretMatcherImpl : ISecretMatcher
     {
         private string secret;
-        public SecretMatcherImpl(string secret)
+
+        public SecretMatcherImpl()
         {
-            this.secret = secret;
         }
 
         public string getMatch(string input)
@@ -36,8 +36,7 @@ namespace MasterMind.Services
                                   );*/
 
             //Get number of element at the wrong position
-            //TODO: Correction du cas 1322  avec par exemple 1223 qui va retourner: ++- à la place de ++--
-            int wrongPosition = input.Count(elt => !secret.IndexOf(elt).Equals(-1) && exactMatch.ToString().IndexOf(elt).Equals(-1));
+            int wrongPosition = input.Where(elt => !secret.IndexOf(elt).Equals(-1) && exactMatch.ToString().IndexOf(elt).Equals(-1)).Distinct().Count();
 
             return exactMatch.Length.convertValueToString("+")+ wrongPosition.convertValueToString("-");
         }

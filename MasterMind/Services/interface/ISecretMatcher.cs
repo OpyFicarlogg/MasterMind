@@ -4,7 +4,7 @@ using System.Text;
 
 namespace MasterMind.Services
 {
-    interface ISecretMatcher
+    public interface ISecretMatcher
     {
         string getMatch(string input);
         void setSecret(string secret);
